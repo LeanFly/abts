@@ -125,6 +125,10 @@ Flutter · Android · 永久免费 · 开源
 
 > 怎么确认架构：设置 → 我的设备 → 处理器型号；或用 CPU-Z / AIDA64 查看 ABI 一栏。
 
+### iOS（iPhone / iPad）
+
+iOS 版提供未签名 IPA（iOS 15.0+），需在电脑上用 Apple ID 自签后安装，以 Windows + Sideloadly 为例的完整教程（含常见报错处理，iPhone XR 实测）见 **[iOS 安装指南](docs/ios-install.md)**。
+
 ## 从源码构建
 
 ```bash

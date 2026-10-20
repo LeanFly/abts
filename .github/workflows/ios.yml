@@ -62,6 +62,19 @@ jobs:
       - name: Pub get
         run: flutter pub get
 
+      - name: Fix umeng_common_sdk duplicate Swift/ObjC class
+        run: |
+          # The plugin ships both a template Swift stub (getPlatformVersion only)
+          # and the real ObjC implementation with the same class name, which fails
+          # with "Duplicate interface definition for class 'UmengCommonSdkPlugin'".
+          SWIFT_FILE=$(find "$HOME/.pub-cache/hosted" -path "*umeng_common_sdk-*/ios/Classes/UmengCommonSdkPlugin.swift" 2>/dev/null | head -1)
+          if [ -n "$SWIFT_FILE" ]; then
+            echo "Removing template Swift stub: $SWIFT_FILE"
+            rm -f "$SWIFT_FILE"
+          else
+            echo "No Swift stub found (plugin may have fixed upstream)"
+          fi
+
       - name: Build iOS (unsigned)
         run: flutter build ios --release --no-codesign
 
